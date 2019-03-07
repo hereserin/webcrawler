@@ -19,7 +19,7 @@ class Spider
 
 
 
-  def enqueue(url, method)
+  def enqueue(url, method, data = {})
     url = agent.resolve(url).to_s
     return if @handlers[url]
     @urls << url
@@ -35,6 +35,7 @@ class Spider
 
     index = @results.length
     enqueued_urls.each do |url, handler|
+
       @processor.send(handler[:method], agent.get(url), handler[:data])
 
       if block_given? && @results.length > index

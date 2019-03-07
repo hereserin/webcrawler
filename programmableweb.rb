@@ -1,9 +1,11 @@
+require_relative "spider.rb"
+
 class ProgrammableWeb
   attr_reader :root, :handler
 
   def initialize(root: "https://www.programmableweb.com/apis/directory", handler: :process_index, **options)
     @root = root
-    @hander = handler
+    @handler = handler
     @options = options
   end
 
@@ -25,7 +27,7 @@ class ProgrammableWeb
     end
   end
 
-  def process_api(page, date{})
+  def process_api(page, data = {} )
     fields = page.search("#tabs-content .field").each_with_object({}) do |tag, o|
       key = tag.search("label").text.strip.downcase.gsub(%r{[^\w]+}, ' ').gsub(%r{\s+}, "_").to_sym
       val = tag.search("span").text
