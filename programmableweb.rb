@@ -1,4 +1,4 @@
-require_relative "spider.rb"
+# require_relative "spider.rb"
 
 class ProgrammableWeb
   attr_reader :root, :handler
